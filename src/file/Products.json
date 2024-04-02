@@ -1,0 +1,142 @@
+[
+	{
+		"cod": "501asd",
+		"nombre": "Logitech G Saitek Pro Flight Rudder Pedals",
+		"detalle": "Timón/Pedales para Vuelo y Freno para Simulación de Vuelo, Centrado Automático, Tensión Ajustable, USB, PC - Negro",
+		"precio": 125000,
+		"stock": 25,
+		"img": "/assets/images/cod1.png",
+		"categoria": "Pedales",
+		"id": 1
+	},
+	{
+		"cod": "502asd",
+		"nombre": "Thrustmaster TPR",
+		"detalle": "Sistema de timón experto de Thrustmaster para simulación de vuelo en PC",
+		"precio": 143000,
+		"stock": 18,
+		"img": "/assets/images/cod2.png",
+		"categoria": "Pedales",
+		"id": 2
+	},
+	{
+		"cod": "503asd",
+		"nombre": "Thrustmaster TCA Quadrant Airbus Edition",
+		"detalle": "Réplica ergonómica del cuadrante de aceleración de Airbus - Compatible con PC",
+		"precio": 158000,
+		"stock": 12,
+		"img": "/assets/images/cod3.png",
+		"categoria": "Aceleradores",
+		"id": 3
+	},
+	{
+		"cod": "504asd",
+		"nombre": "Thrustmaster TCA Quadrant Boeing Edition",
+		"detalle": "Réplica del Cuadrante de Aceleración - con Licencia Oficial de Boeing, Xbox y PC",
+		"precio": 151000,
+		"stock": 14,
+		"img": "/assets/images/cod4.png",
+		"categoria": "Aceleradores",
+		"id": 4
+	},
+	{
+		"cod": "505asd",
+		"nombre": "Honeycomb Aeronautical Bravo Throttle",
+		"detalle": "Quadrant con Auto Pilot & Annunciator Panel en la calidad de la aviación para los simuladores de vuelo | Sistema de Control Universal para Simmers y Pilotos | PC",
+		"precio": 137000,
+		"stock": 16,
+		"img": "/assets/images/cod5.png",
+		"categoria": "Aceleradores",
+		"id": 5
+	},
+	{
+		"cod": "506asd",
+		"nombre": "TCA YOKE BOEING EDITION - PC / XBOX",
+		"detalle": "Palanca de mandos con licencia oficial de Boeing inspirada en el icónico avión de pasajeros Boeing 787 (réplica ergonómica a escala 1:1)",
+		"precio": 68000,
+		"stock": 32,
+		"img": "/assets/images/cod6.png",
+		"categoria": "Mandos",
+		"id": 6
+	},
+	{
+		"cod": "507asd",
+		"nombre": "Honeycomb Aeronautical Alpha",
+		"detalle": "Flight Controls Yoke & Switch Panel en Calidad de Aviación para Simuladores de Vuelo | Sistema de Control Universal para Simmers y Pilotos | Simulador de Vuelo para PC",
+		"precio": 51000,
+		"stock": 39,
+		"img": "/assets/images/cod7.png",
+		"categoria": "Mandos",
+		"id": 7
+	},
+	{
+		"cod": "508asd",
+		"nombre": "Saitek Pro - MultiAvionics",
+		"detalle": "Flight Instrument Panel - Logitech",
+		"precio": 48000,
+		"stock": 63,
+		"img": "/assets/images/cod8.png",
+		"categoria": "Aviónica",
+		"id": 8
+	},
+	{
+		"cod": "509asd",
+		"nombre": "Saitek Pro - Radio",
+		"detalle": "SAITEK PRO FLIGHT RADIO PANEL",
+		"precio": 55000,
+		"stock": 37,
+		"img": "/assets/images/cod9.png",
+		"categoria": "Aviónica",
+		"id": 9
+	},
+	{
+		"cod": "510asd",
+		"nombre": "U-ProPit of VRinsight",
+		"detalle": "Portable control and screen system for propel type aircraft. All the gauges, buttons and knobs are displaying synchronized with Microsoft's Flight Simulator",
+		"precio": 78000,
+		"stock": 22,
+		"img": "/assets/images/cod10.png",
+		"categoria": "Aviónica",
+		"id": 10
+	},
+	{
+		"cod": "511asd",
+		"nombre": "U-JetPit of VRinsight",
+		"detalle": "portable instrument panel for jet aircraft. It features a ND, PFD, EFIS and MCP as well as real knobs. All the instruments, buttons and knobs are synchronized with default Flight Simulator jet aircraft and most aircraft add-ons",
+		"precio": 82000,
+		"stock": 17,
+		"img": "/assets/images/cod11.png",
+		"categoria": "Aviónica",
+		"id": 11
+	},
+	{
+		"cod": "512asd",
+		"nombre": "Panel FST-PRO",
+		"detalle": "CESSNA C172-182 para montar módulos",
+		"precio": 160000,
+		"stock": 4,
+		"img": "/assets/images/cod12.png",
+		"categoria": "Paneles",
+		"id": 12
+	},
+	{
+		"cod": "513asd",
+		"nombre": "FST-PRO-II",
+		"detalle": "Panel tipo Baron 58 con sistema de instrumentación VFR/IFR",
+		"precio": 210000,
+		"stock": 3,
+		"img": "/assets/images/cod13.png",
+		"categoria": "Paneles",
+		"id": 13
+	},
+	{
+		"cod": "514asd",
+		"nombre": "B737 - DOBLE MANDO",
+		"detalle": "Panel B737Panel completamente equipado con switches y pantallas incluidas. Módulos incluidos: - CDU- MCP- 2 EFIS-Palanca de tren de aterrizaje",
+		"precio": 670000,
+		"stock": 2,
+		"img": "/assets/images/cod14.png",
+		"categoria": "Paneles",
+		"id": 14
+	}
+]
