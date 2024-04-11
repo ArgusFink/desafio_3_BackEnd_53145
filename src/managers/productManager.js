@@ -1,8 +1,4 @@
-const fs = require('node:fs')
-const { stringify } = require('node:querystring')
-
-
-
+import fs from 'node:fs'
 
 class ProductManager {
 
@@ -121,14 +117,10 @@ class ProductManager {
 
             const checkId = productsDataBase.findIndex((article) => article.id === parseInt(pid))
 
-            //console.log('El indice es: ', checkId)
-
             if (checkId < 0) {
-                //throw new Error('No existe el producto')
+
                 return (Error, 'No existe producto con el ID indicado')
             }
-
-            //console.log(productsDataBase[checkId])
 
             productsDataBase[checkId] = {
 
@@ -148,7 +140,6 @@ class ProductManager {
         }
     }
 
-
     deleteProduct = async (pid) => {
         try {
 
@@ -156,19 +147,14 @@ class ProductManager {
 
             const checkId = productsDataBase.findIndex((article) => article.id === parseInt(pid))
 
-            //console.log('El indice es: ', checkId)
-
             if (checkId < 0) {
-            //if (checkId === undefined) {
-                //throw new Error('No existe el producto')
+
                 return (Error, 'No existe el producto')
             }
 
             const newDataBase = productsDataBase.filter((tempProduct) => tempProduct.id !== parseInt(pid))
 
             await fs.promises.writeFile(this.path, JSON.stringify(newDataBase, null, '\t'), 'utf-8')
-
-            //return productsDataBase
 
             return (await this.readFile())
 
@@ -180,6 +166,4 @@ class ProductManager {
     }
 }
 
-module.exports = {
-    ProductManager
-}
+export default ProductManager
