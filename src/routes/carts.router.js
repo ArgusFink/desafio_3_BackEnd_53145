@@ -10,29 +10,28 @@ cartsRouter.post('/', async (req, res) => {
     const { products: [] } = req.body
 
     const newCart = {
-
-        products: []
-
-    }
+    
+            id: undefined,
+            products: []
+    
+        }
 
     res.status(200).send(await carts.createCart(newCart))
 
-}) 
+})
 
 cartsRouter.get('/:cid', async (req, res) => {
 
     const { cid } = req.params
 
-    res.send(await carts.getCartById(cid))
+    res.status(200).send(await carts.getCartById(cid))
 
 })
 
-cartsRouter.post('/:cid/products/:pid ', async (req, res) => {
+cartsRouter.post('/:cid/product/:pid', async (req, res) => {
 
     const { cid, pid } = req.params
 
-    const answer = await carts.addProductToCart(cid, {product:pid, quantity:1}) 
-
-    res.send(await carts.addProductToCart(cid, pid))
+    res.status(200).send(await carts.addProductToCart(cid, pid))
 
 })

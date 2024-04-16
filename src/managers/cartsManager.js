@@ -52,11 +52,11 @@ class CartManager {
 
             const cartsDataBase = await this.readFile()
 
-            const cardID = cartsDataBase.find(cart => cart.id === parseInt(cid))
+            const cartUnit = cartsDataBase.find(searchCart => searchCart.id === parseInt(cid))
 
-            if (!cardID) return 'No existe ningún carrito con ese ID'
+            if (!cartUnit) return 'No existe ningún carrito con ese ID'
 
-            return cardID
+            return cartUnit
 
         } catch (error) {
 
@@ -65,29 +65,44 @@ class CartManager {
 
     }
 
-    addProductToCart = async (cid, product) => {        
+    addProductToCart = async (cid, pid) => {
 
         try {
 
             const cartsDataBase = await this.readFile()
+            const cart = cartsDataBase.find(cart => cart.id === parseInt(cid))
 
-            const cardID = cartsDataBase.find(cart => cart.id === parseInt(cid))
+            if (!cart) return 'No existe ningún carrito con el indicado ID'
 
-            if (!cardID) return 'No existe ningún carrito con ese ID'
+            const productINDX = cart.products.findIndex(searchProduct => searchProduct.product === parseInt(pid))
 
-            const productIn = cardID.findIndex(prodIn => prodIn.parseInt(product) === parseInt(pid))
+            if ( isNaN(pid) || parseInt(pid) <= 0 ) return 'ID de producto incorrecto'
 
-            if (!productIn) cart.product.push(product)
+            if (productINDX === -1 && parseInt(pid) > 0) {
 
-            console.log(cardID)
-        
-            return cardID
+                const plusProduct = {
+
+                    product: parseInt(pid),
+                    quantity: 1
+
+                }
+
+                cart.products.push(plusProduct)
+
+            } else {
+
+                cart.products[productINDX].quantity += 1
+
+            }
+
+            await fs.promises.writeFile(this.path, JSON.stringify(cartsDataBase, null, '\t'), 'utf-8')
+
+            return cart
 
         } catch (error) {
 
             throw new Error("Not found");
         }
-
     }
 
 }
