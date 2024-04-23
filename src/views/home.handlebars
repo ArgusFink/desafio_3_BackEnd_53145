@@ -1,0 +1,19 @@
+<main>
+
+    <h1>Bienvenidos a mi E-commerce</h1>
+    <h2>Bienvenido {{ nombre }} {{ apellido }} </h2>
+    <br><br>
+
+    <div>
+
+        {{#each prods}}
+            <div>
+                <p>Artículo: {{this.title}}</p>
+                <p>Precio: ${{this.price}}</p>
+                <hr>
+            </div>
+        {{/each}}
+
+    </div>
+
+</main>
