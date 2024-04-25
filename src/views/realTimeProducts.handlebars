@@ -1,7 +1,28 @@
-<div>
+ <div>
 
-    realTimeProducts socket
+    <h2>Ingreso de Productos</h2>
+    <div>
+        <input placeholder="Nombre..." type="text" name="title" id="title"><br><br>
+        
+        <input placeholder="Desripción..." type="text" name="description" id="description"><br><br>
+        
+        <input placeholder="Precio..." type="number" name="price" id="price"><br><br>
+        
+        <input placeholder="Ruta de Imagen..." type="text" name="thumbnail" id="thumbnail"><br><br>
+
+        <input placeholder="Código..." type="text" name="code" id="code"><br><br>
+
+        <label>Al finalizar la carga de stock; PRESIONAR ENTER</label><br>
+        <input placeholder="Stock..." type="number" name="stock" id="stock"><br><br>
+        
+        
+    </div>
+    <div >
+        <ul id="list-products"></ul>
+    </div>
 
 </div>
+
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/realTimeProducts.js"></script>
+

@@ -10,6 +10,6 @@ export const socketConf = (httpServer) => {
 	io.on('connection', (socket) => {
 		console.log('Cliente conectado');
 	});
-
+    
 	return io;
 };
