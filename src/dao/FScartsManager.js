@@ -32,7 +32,7 @@ class CartManager {
                 cart.id = 1
 
             } else {
-
+  
                 cart.id = cartsDataBase[cartsDataBase.length - 1].id + 1;
 
             }

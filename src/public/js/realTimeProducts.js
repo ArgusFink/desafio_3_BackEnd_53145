@@ -7,8 +7,6 @@ const inputThumbnail = document.getElementById('thumbnail')
 const inputCode = document.getElementById('code')
 const inputStock = document.getElementById('stock')
 
-
-
 const productList = document.getElementById('list-products')
 
 inputStock.addEventListener('keyup', evt => {
