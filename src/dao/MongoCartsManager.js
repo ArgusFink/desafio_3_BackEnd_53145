@@ -1,233 +1,80 @@
 import { cartModel } from "./models/carts.models.js"
+import { productModel } from "./models/products.models.js"
 
 class MongoCartManager {
 
-    // constructor(path) {
+    createCart = async () => {
 
-    //     this.path = path
-    // }
+        const rest = new cartModel().save()
 
-    // readFile = async () => {
+        console.log(rest)
 
-    //     try {
-    //         const dataJson = await fs.promises.readFile(this.path, 'utf-8')
-    //         return JSON.parse(dataJson)
-
-    //     } catch (error) {
-
-    //         console.log(error)
-    //         return []
-
-    //     }
-    // }
-
-    createCart = async (cart) => {
-
-        // try {
-
-        //     const cartsDataBase = await this.readFile()
-
-        //     if (cartsDataBase.length === 0) {
-
-        //         cart.id = 1
-
-        //     } else {
-  
-        //         cart.id = cartsDataBase[cartsDataBase.length - 1].id + 1;
-
-        //     }
-
-        //     cartsDataBase.push(cart)
-
-        //     await fs.promises.writeFile(this.path, JSON.stringify(cartsDataBase, null, '\t'), 'utf-8')
-
-        // } catch (error) {
-        //     console.log(error)
-        // } 
-
-        const result = await cartModel.create(cart)
         
-        return(result)
 
     }
 
-
-    // BCKP
-    // createCart = async (cart) => {
-
-    //     try {
-
-    //         const cartsDataBase = await this.readFile()
-
-    //         if (cartsDataBase.length === 0) {
-
-    //             cart.id = 1
-
-    //         } else {
-  
-    //             cart.id = cartsDataBase[cartsDataBase.length - 1].id + 1;
-
-    //         }
-
-    //         cartsDataBase.push(cart)
-
-    //         await fs.promises.writeFile(this.path, JSON.stringify(cartsDataBase, null, '\t'), 'utf-8')
-
-    //     } catch (error) {
-    //         console.log(error)
-    //     } 
-
-    // }
-
-
-
     getCartById = async (cid) => {
-        // try {
-
-        //     const cartsDataBase = await this.readFile()
-
-        //     const cartUnit = cartsDataBase.find(searchCart => searchCart.id === parseInt(cid))
-
-        //     if (!cartUnit) return 'No existe ningún carrito con ese ID'
-
-        //     return cartUnit
-
-        // } catch (error) {
-
-        //     throw new Error("Not found");
-        // }
 
         const cart = await cartModel.find({})
 
         return(cart)
 
-
     }
 
 
-    //BCKP
-    // getCartById = async (cid) => {
-    //     try {
 
-    //         const cartsDataBase = await this.readFile()
+    addProductToCart = async (cid, pid, quantity) => {
 
-    //         const cartUnit = cartsDataBase.find(searchCart => searchCart.id === parseInt(cid))
+            console.log(cid)
+        
+            const cart = await cartModel.findOne({_id: cid})
 
-    //         if (!cartUnit) return 'No existe ningún carrito con ese ID'
-
-    //         return cartUnit
-
-    //     } catch (error) {
-
-    //         throw new Error("Not found");
-    //     }
-
-    // }
-
-
-
-    addProductToCart = async (cid, pid) => {
-
-        //try {
-
-            //const cartsDataBase = await this.readFile()
-            /*const cart = await cartModel.find(cart => cart.id === parseInt(cid))*/
-
-            const cart = await cartModel.find(cid)
-
-            const queryProduct = await cartModel.find({
-                products: {
-                  $elemMatch: {
-                    product: pid
-                  }
-                }
-              })
-
-            console.log('El cart es', cart)
-            console.log('El queryProduct es', queryProduct)
-
-            if (!cart) return 'No existe ningún carrito con el indicado ID'
-
-            //const productINDX = cart.products.findIndex(searchProduct => searchProduct.product === parseInt(pid))
-
-
-
-            //const productINDX = cart.products.findIndex(searchProduct => searchProduct.product === parseInt(pid))
+            if(!cart) {
+                
+                throw new Error ('No existe el carrito')
             
-            if ( isNaN(pid) || parseInt(pid) <= 0 ) return 'ID de producto incorrecto'
+            }
 
-            if (productINDX === -1 && parseInt(pid) > 0) {
+            const product = await productModel.findOne({_id: pid})
 
-                const plusProduct = {
+            if(!product) {
+                
+                throw new Error ('No existe el producto')
+            
+            }
 
-                    product: parseInt(pid),
-                    quantity: 1
 
-                }
+            const nuevoObjeto = {
 
-                cart.products.push(plusProduct)
-
-            } else {
-
-                cart.products[productINDX].quantity += 1
+                product: pid,
+                quantity
 
             }
 
-            return cart
-            
+            let check = false;
 
+            cart.products.forEach(product => {
 
-            //await fs.promises.writeFile(this.path, JSON.stringify(cartsDataBase, null, '\t'), 'utf-8')            
+                console.log(product)
 
-        // } catch (error) {
+                if (product.product === pid){
 
-        //     throw new Error("Not found");
-        // }
+                     product.quantity += quantity
+                     
+                     check = true;
+
+                }                
+            });
+
+            if(check) {
+
+                return await cartModel.findByIdAndUpdate({_id: cid}, cart)
+
+            }
+
+            await cartModel.findByIdAndUpdate(cid, { $push: { products: nuevoObjeto } })
+
     }
-
-
-
-    // BCKP
-    // addProductToCart = async (cid, pid) => {
-
-    //     try {
-
-    //         const cartsDataBase = await this.readFile()
-    //         const cart = cartsDataBase.find(cart => cart.id === parseInt(cid))
-
-    //         if (!cart) return 'No existe ningún carrito con el indicado ID'
-
-    //         const productINDX = cart.products.findIndex(searchProduct => searchProduct.product === parseInt(pid))
-
-    //         if ( isNaN(pid) || parseInt(pid) <= 0 ) return 'ID de producto incorrecto'
-
-    //         if (productINDX === -1 && parseInt(pid) > 0) {
-
-    //             const plusProduct = {
-
-    //                 product: parseInt(pid),
-    //                 quantity: 1
-
-    //             }
-
-    //             cart.products.push(plusProduct)
-
-    //         } else {
-
-    //             cart.products[productINDX].quantity += 1
-
-    //         }
-
-    //         await fs.promises.writeFile(this.path, JSON.stringify(cartsDataBase, null, '\t'), 'utf-8')
-
-    //         return cart
-
-    //     } catch (error) {
-
-    //         throw new Error("Not found");
-    //     }
-    // }
-
 }
 
 export default MongoCartManager

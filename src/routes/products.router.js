@@ -1,7 +1,6 @@
 import { Router } from 'express'
 import ProductManager from '../dao/FSproductManager.js'
 import MongoProductManager from '../dao/MongoProductManager.js'
-//import { productModel } from '../dao/models/products.models.js'
 
 const router = Router()
 const path = './src/file/Products.json'
@@ -12,48 +11,27 @@ router.get('/', async (req, res) => {
 
     const { limit } = req.query
 
-    if (limit === undefined || limit < 0 || isNaN(limit)) {
+    let products 
+
+    if(!limit) {
+
+        products = await mongoProducts.getProducts()
+
+        return res.json(products)        
+    
+    } 
+
+    products = await mongoProducts.getProductsLimit(limit)
         
-        res.send(await mongoProducts.getProducts())
-        //const products = await productModel.find({})
-        //res.send(products)
+    res.json(products)
 
-
-        //BCKP CONECTA A MONGO
-        // const products = await productModel.find({})
-        // res.send(products)
-
-        //************************** */
-        //    ADD LIMIT                /
-        //************************** */
-    } /*else {
-
-        res.send(await products.getProductsLimit(limit))
-
-    }*/
 })
-
-// <<< BCKP 
-// router.get('/', async (req, res) => {
-
-//     const { limit } = req.query
-
-//     if (limit === undefined || limit < 0 || isNaN(limit)) {
-        
-//         res.send(await products.getProducts())
-
-//     } else {
-
-//         res.send(await products.getProductsLimit(limit))
-
-//     }
-// })
 
 router.get('/:pid', async (req, res) => {
 
     const { pid } = req.params
 
-    res.send(await products.getProductById(pid))
+    res.send(await mongoProducts.getProductById(pid))
 
 })
 
@@ -76,72 +54,35 @@ router.post('/', async (req, res) => {
 
 })
 
-
-
-// BCKP
-// router.post('/', async (req, res) => {
-
-//     const { title, description, price , thumbnail, code, stock } = req.body
-
-//     if (!title || !description || !price || !code || !stock) return res.send({ status: 'error', error: 'faltan completar campos' })
-
-//     const newProduct = {
-//         title,
-//         description,
-//         price,
-//         thumbnail,
-//         code,
-//         stock
-//     }
-
-//     res.status(200).send(await products.addProduct(newProduct))
-
-// })
-
-
-
 router.put('/:pid', async (req, res) => {
 
     const { pid } = req.params
-    //const { productToUpdate } = req.body
-    const { title, description, price , thumbnail, code, stock } = req.body
+    
+    const { title, description, price , thumbnail, stock } = req.body
 
-    if (!title || !description || !price || !code || !stock) return res.send({ status: 'error', error: 'faltan completar campos' })
+    if (!title && !description && !price && !stock) {
+        
+        console.log(title)
 
-    //res.send(await mongoProducts.updateProduct(pid, productToUpdate))
+        return res.send({ status: 'error', error: 'faltan completar campos' })
 
-    res.send(await mongoProducts.updateProduct(pid, title, description, price , thumbnail, code, stock))
+    }
+
+    await mongoProducts.updateProduct(pid, req.body)
+
+    res.json({Status:'success', message:'Producto actualizado', payload: null})
 
 })
-
-
-//BCKP
-// router.put('/:pid', async (req, res) => {
-
-//     const { pid } = req.params
-//     const productToUpdate = req.body
-
-//     res.send(await products.updateProduct(pid, productToUpdate))
-
-// })
-
 
 router.delete('/:pid', async (req, res) => {
 
     const { pid } = req.params
 
-    res.send(await mongoProducts.deleteProduct(pid))
+    await mongoProducts.deleteProduct(pid)
+
+    res.json({Status:'success', message:'Producto eliminado', payload: null})
+
 
 })
-
-
-//BCKP
-// router.delete('/:pid', async (req, res) => {
-
-//     const { pid } = req.params
-
-//     res.send(await products.deleteProduct(pid))
-
-// })
 
 export default router

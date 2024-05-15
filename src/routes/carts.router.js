@@ -10,35 +10,9 @@ const mongoCarts = new MongoCartManager()
 
 cartsRouter.post('/', async (req, res) => {
 
-    const { products: [] } = req.body
-
-    const newCart = {
-    
-            id: undefined,
-            products: []
-    
-        }
-
-    res.status(200).send(await mongoCarts.createCart(newCart))
+    res.status(200).send(await mongoCarts.createCart())
 
 })
-
-
-//BCKP
-// cartsRouter.post('/', async (req, res) => {
-
-//     const { products: [] } = req.body
-
-//     const newCart = {
-    
-//             id: undefined,
-//             products: []
-    
-//         }
-
-//     res.status(200).send(await carts.createCart(newCart))
-
-// })
 
 cartsRouter.get('/:cid', async (req, res) => {
 
@@ -48,34 +22,12 @@ cartsRouter.get('/:cid', async (req, res) => {
 
 })
 
-
-//BCKP
-// cartsRouter.get('/:cid', async (req, res) => {
-
-//     const { cid } = req.params
-
-//     res.status(200).send(await carts.getCartById(cid))
-
-// })
-
-
 cartsRouter.post('/:cid/product/:pid', async (req, res) => {
 
     const { cid, pid } = req.params
 
-    res.status(200).send(await mongoCarts.addProductToCart({_id: cid}, pid))
+    const quantity = 1
 
-
+    res.status(200).send(await mongoCarts.addProductToCart(cid, pid, quantity))
 
 })
-
-
-
-// BCKP
-// cartsRouter.post('/:cid/product/:pid', async (req, res) => {
-
-//     const { cid, pid } = req.params
-
-//     res.status(200).send(await carts.addProductToCart(cid, pid))
-
-// })

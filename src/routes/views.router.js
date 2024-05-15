@@ -1,4 +1,3 @@
-// 1º 37'
 import { Router } from "express"
 import ProductManager from '../dao/FSproductManager.js'
 
@@ -7,8 +6,6 @@ const path = './src/file/Products.json'
 const products = new ProductManager(path)
 
 router.get('/', async (req, res) => {
-
-    //const prods = await products.readFile()
 
     res.render('home' , {
 
