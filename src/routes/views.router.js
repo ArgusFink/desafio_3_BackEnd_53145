@@ -1,11 +1,15 @@
 import { Router } from "express"
 import ProductManager from '../dao/FSproductManager.js'
+import MongoProductManager from "../dao/MongoProductManager.js"
 
 const router = Router()
 const path = './src/file/Products.json'
 const products = new ProductManager(path)
 
 router.get('/', async (req, res) => {
+
+    const productService = new MongoProductManager()
+    const { docs, page, hasPrevPage, hasNextPage, prevPage, nextPage } = await productService.getProducts()
 
     res.render('home' , {
 
@@ -20,9 +24,22 @@ router.get('/', async (req, res) => {
 
 })
 
-router.get('/realTimeProducts', (req, res) => {
+router.get('/realTimeProducts', async (req, res) => {
 
-    res.render('realTimeProducts', {})
+    
+    const productService = new MongoProductManager()
+    const { docs, page, hasPrevPage, hasNextPage, prevPage, nextPage } = await productService.getProducts()
+
+    res.render('realTimeProducts', {
+
+        products: docs,
+        page,
+        hasPrevPage,
+        hasNextPage,
+        prevPage,
+        nextPage   
+
+    })
 
 })
 

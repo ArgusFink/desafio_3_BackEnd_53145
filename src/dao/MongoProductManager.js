@@ -11,9 +11,11 @@ class MongoProductManager {
 
     getProducts = async () => {
 
-        return await productModel.find({})
+        //return await productModel.find({})
+        //return await productModel.paginate({}, {limit: 10, page: 2, lean: true})
+        return await productModel.paginate({})    
     
-    }
+    } 
 
     getProductById = async (pid) => {
 
