@@ -9,8 +9,6 @@ class MongoCartManager {
 
         console.log(rest)
 
-        
-
     }
 
     getCartById = async (cid) => {
