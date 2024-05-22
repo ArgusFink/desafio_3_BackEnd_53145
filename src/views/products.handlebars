@@ -7,13 +7,16 @@
         <div>
             <p><strong>Artículo: </strong>{{this.title}}</p>
             <p><strong>Precio: </strong>${{this.price}}</p>
-            <p><strong>Código: </strong>{{this.code}}</p>
+            <p><strong>Código: </strong>{{this.code}}</p>            
+            <a href="#" id="anchAddCart">Agregar al Carrito</a>
             <hr>            
         </div>
     {{/each}}
+
+
     
     {{#if hasPrevPage}}
-        <a href="/products?numPage={{prevPage}}">Anterior</a>
+        <a href="/products?numPage={{prevPage}}?limit={{limit}}">Anterior</a>
     {{/if}}
 
     <label>{{page}}</label>
@@ -23,3 +26,23 @@
     {{/if}}
 
 </main>
+
+
+    <script>
+
+        const addCart = document.querySelector('#anchAddCart')
+        addCart.addEventListener('submit', (e) => {
+            e.preventDefault()
+            
+            fetch(`http://localhost8080/api/carts/66397d2edc99feea424aea10/product/${this._id}`, {
+
+                method: 'POST',
+                headers: {
+
+                    'Content-Type': 'applicatoin/json'
+
+                }
+            }) 
+        })
+
+    </script>

@@ -19,8 +19,6 @@ class MongoCartManager {
 
     }
 
-
-
     addProductToCart = async (cid, pid, quantity) => {
 
             console.log(cid)
@@ -73,6 +71,22 @@ class MongoCartManager {
             await cartModel.findByIdAndUpdate(cid, { $push: { products: nuevoObjeto } })
 
     }
+
+    deleteProdInCart = async (cid, pid) => await cartModel.findOneAndUpdate(
+
+        { _id: cid },
+        { $pull: { products: { product: pid, quantity: 1}}},
+        { new: true }
+        
+    )
+
+    emptyCart = async (cid) => cartModel.findOneAndUpdate(
+
+        { _id: cid },
+        { $set: { products: [] }},
+        { new: true }
+        
+    )
 }
 
 export default MongoCartManager
